@@ -1,6 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\KelasController;
+use App\Http\Controllers\PresensiController;
+use App\Http\Controllers\NotifikasiController;
+use App\Http\Controllers\KartuController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +20,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('Welcome');
 });
+
+// Resource routes
+Route::resource('users', UserController::class);
+Route::resource('roles', RoleController::class);
+Route::resource('kelas', KelasController::class);
+Route::resource('presensi', PresensiController::class);
+Route::resource('notifikasi', NotifikasiController::class);
+Route::resource('kartu', KartuController::class);
