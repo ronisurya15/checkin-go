@@ -14,7 +14,10 @@ return new class extends Migration
     public function up()
     {
         Schema::create('kartu', function (Blueprint $table) {
-            $table->id();
+            $table->id('kartu_id');
+            $table->uuid('uuid')->unique();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('kelas_id')->constrained('kelas')->onDelete('cascade');
             $table->timestamps();
         });
     }

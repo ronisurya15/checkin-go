@@ -15,6 +15,11 @@ return new class extends Migration
     {
         Schema::create('presensi', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('kelas_id')->constrained('kelas')->onDelete('cascade');
+            $table->date('tanggal');
+            $table->timestamp('waktu_masuk')->nullable();
+            $table->timestamp('waktu_keluar')->nullable();
             $table->timestamps();
         });
     }
