@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Presensi</title>
+    <title>Notifikasi</title>
 </head>
 <body>
     <h2>Ini halaman notifikasi</h2>
