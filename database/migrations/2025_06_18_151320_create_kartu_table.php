@@ -14,10 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('kartu', function (Blueprint $table) {
-            $table->id('kartu_id');
+            $table->id('id');
             $table->uuid('uuid')->unique();
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('kelas_id')->constrained('kelas')->onDelete('cascade');
+            $table->boolean('aktif')->default(true);
+            $table->timestamp('expired_at')->nullable();
             $table->timestamps();
         });
     }
