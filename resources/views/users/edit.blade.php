@@ -6,39 +6,42 @@
         <div class="col-sm-6 col-md-6 col-sm-12 col-12">
             <div class="card">
                 <div class="card-header text-white bg-dark d-flex justify-content-between align-items-center">
-                    <span>Tambah Pengguna</span>
+                    <span>Edit Pengguna</span>
                     <a href="{{ route('users.index') }}" class="btn btn-sm btn-warning">Kembali</a>
                 </div>
 
                 <div class="card-body">
-                    <form action="{{ route('users.store') }}" method="POST">
+                    <form action="{{ route('users.update', $user->id) }}" method="POST">
                         @csrf
+                        @method('PUT')
 
                         <div class="form-group">
                             <label>Nama Pengguna <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" name="nama_pengguna" placeholder="Masukkan Nama" required>
+                            <input type="text" class="form-control" name="nama_pengguna" required value="{{ $user->name }}">
                         </div>
 
                         <div class="form-group mt-2">
                             <label>Username <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" name="username" placeholder="Masukkan Username" required>
+                            <input type="text" class="form-control" name="username" required value="{{ $user->username }}">
                         </div>
 
                         <div class="form-group mt-2">
                             <label>No HP <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" name="no_hp" placeholder="Masukkan Nomor HP" required>
+                            <input type="text" class="form-control" name="no_hp" required value="{{ $user->no_hp }}">
                         </div>
 
                         <div class="form-group mt-2">
-                            <label>Password <span class="text-danger">*</span></label>
-                            <input type="password" class="form-control" name="password" placeholder="Masukkan Password" required>
+                            <label>Password <small class="text-muted">(Kosongkan jika tidak diubah)</small></label>
+                            <input type="password" class="form-control" name="password">
                         </div>
 
                         <div class="form-group mt-2">
                             <label>Peran <span class="text-danger">*</span></label>
                             <select name="peran" class="form-control" required>
                                 @foreach ($roles as $role)
-                                    <option value="{{ $role->nama }}">{{ ucfirst($role->nama) }}</option>
+                                    <option value="{{ $role->nama }}" {{ $user->peran == $role->nama ? 'selected' : '' }}>
+                                        {{ ucfirst($role->nama) }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>

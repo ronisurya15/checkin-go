@@ -48,6 +48,33 @@ Route::middleware('auth')->group(function () {
 
 // Resource routes
 // Route::resource('users', UserController::class);
+Route::get('login', [AuthController::class, 'login'])->name('login');
+Route::redirect('/login', '/auth/masuk');
+
+
+Route::middleware('auth')->prefix('users')->group(function () {
+    Route::get('/', [UserController::class, 'index'])->name('users.index');
+    Route::get('/create', [UserController::class, 'create'])->name('users.create');
+    Route::post('/', [UserController::class, 'store'])->name('users.store');
+    Route::get('/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
+    Route::put('/{id}', [UserController::class, 'update'])->name('users.update');
+    Route::delete('/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+
+    // Users CRUD routes
+    Route::prefix('users')->group(function () {
+        Route::get('masuk', [AuthController::class, 'login'])->name('auth.login');
+        Route::post('/', [AuthController::class, 'postSignin'])->name('auth.post_login');
+        Route::get('logout', [AuthController::class, 'logout'])->name('auth.logout');
+        Route::get('/', [UserController::class, 'index'])->name('users.index');
+        Route::get('/create', [UserController::class, 'create'])->name('users.create');
+        Route::post('/', [UserController::class, 'store'])->name('users.store');
+        Route::get('/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
+        Route::put('/{id}', [UserController::class, 'update'])->name('users.update');
+        Route::delete('/{id}', [UserController::class, 'destroy'])->name('users.destroy');
+    });
+});
+
+
 // Route::resource('roles', RoleController::class);
 // Route::resource('kelas', KelasController::class);
 // Route::resource('presensi', PresensiController::class);
