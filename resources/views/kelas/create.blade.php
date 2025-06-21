@@ -20,7 +20,6 @@
                             <input type="text" class="form-control" name="jenjang_kelas" placeholder="Masukkan Jenjang Kelas" required>
                         </div>
 
-
                         <div class="form-group mt-2">
                             <label for="">Lokasi Ruangan <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" name="lokasi_ruangan" placeholder="Masukkan Ruangan Kelas" required>

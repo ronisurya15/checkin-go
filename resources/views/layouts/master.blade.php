@@ -43,10 +43,10 @@
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             @if(auth()->user()->role_id == 5)
-                            <li><a class="dropdown-item" href="#">Lakukan Presensi</a></li>
+                            <li><a class="dropdown-item" href="{{ route('presensi.create') }}">Lakukan Presensi</a></li>
                             @endif
-                            <li><a class="dropdown-item" href="#">Daftar Presensi</a></li>
-                            <li><a class="dropdown-item" href="#">Riwayat Presensi</a></li>
+                            <li><a class="dropdown-item" href="{{ route('presensi.index') }}">Daftar Presensi</a></li>
+                            <li><a class="dropdown-item" href="{{ route('presensi.history') }}">Riwayat Presensi</a></li>
                         </ul>
                     </li>
 

@@ -26,13 +26,6 @@ class KelasController extends Controller
         return redirect()->route('kelas.index')->with('success', 'Data kelas berhasil ditambahkan');
     }
 
-    public function show($id)
-    {
-        $kelas = Kelas::findOrFail($id);
-
-        return view('kelas.show', compact('kelas'));
-    }
-
     public function edit($id)
     {
         $kelas = Kelas::findOrFail($id);
