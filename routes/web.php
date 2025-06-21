@@ -80,6 +80,18 @@ Route::middleware('auth')->prefix('users')->group(function () {
         Route::put('/{id}', [UserController::class, 'update'])->name('users.update');
         Route::delete('/{id}', [UserController::class, 'destroy'])->name('users.destroy');
     });
+
+Route::middleware('auth')->prefix('orangtua')->group(function () {
+    Route::get('/create', [UserController::class, 'createOrangtua'])->name('orangtua.create');
+    Route::post('/', [UserController::class, 'storeOrangtua'])->name('orangtua.store');
+});
+
+Route::middleware('auth')->prefix('siswa')->group(function () {
+    Route::get('/create', [UserController::class, 'createSiswa'])->name('siswa.create');
+    Route::post('/', [UserController::class, 'storeSiswa'])->name('siswa.store');
+});
+
+
 });
 
 

@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Models\Kelas;
 
 class UserController extends Controller
 {
@@ -66,4 +67,59 @@ class UserController extends Controller
         User::destroy($id);
         return redirect()->route('users.index');
     }
+
+    public function createOrangtua()
+{
+    return view('users.create_orangtua');
+}
+
+public function storeOrangtua(Request $request)
+{
+    $request->validate([
+        'nama_pengguna' => 'required|string|max:255',
+        'username' => 'required|unique:users',
+        'no_hp' => 'required',
+        'password' => 'required|min:6',
+    ]);
+
+    User::create([
+        'name' => $request->nama_pengguna,
+        'username' => $request->username,
+        'no_hp' => $request->no_hp,
+        'password' => Hash::make($request->password),
+        'peran' => 'Orang Tua', // langsung set peran
+    ]);
+
+    return redirect()->route('users.index')->with('success', 'Orang tua berhasil ditambahkan.');
+}
+
+
+public function createSiswa()
+{
+    $kelas = Kelas::all(); // ambil data kelas dari DB
+    return view('users.create_siswa', compact('kelas'));
+}
+
+public function storeSiswa(Request $request)
+{
+    $request->validate([
+        'nama_pengguna' => 'required|string|max:255',
+        'username' => 'required|unique:users',
+        'no_hp' => 'required',
+        'password' => 'required|min:6',
+        'kelas_id' => 'required|exists:kelas,id',
+    ]);
+
+    User::create([
+        'name' => $request->nama_pengguna,
+        'username' => $request->username,
+        'no_hp' => $request->no_hp,
+        'password' => Hash::make($request->password),
+        'peran' => 'Siswa',
+        'kelas_id' => $request->kelas_id,
+    ]);
+
+    return redirect()->route('users.index')->with('success', 'Siswa berhasil ditambahkan.');
+}
+
 }

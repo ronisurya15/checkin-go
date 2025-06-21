@@ -36,8 +36,9 @@
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <li><a class="dropdown-item" href="">Tenaga Kependidikan</a></li>
                             <li><a class="dropdown-item" href="">Guru</a></li>
-                            <li><a class="dropdown-item" href="">Orang Tua</a></li>
-                            <li><a class="dropdown-item" href="">Siswa</a></li>
+                            <li><a class="dropdown-item" href="{{ route('orangtua.create') }}">Orang Tua</a></li>
+                            <li><a class="dropdown-item" href="{{ route('siswa.create') }}">Siswa</a></li>
+
                         </ul>
                     </li>
 
