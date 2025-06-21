@@ -27,6 +27,7 @@
                         <a class="nav-link" aria-current="page" href="">Profil</a>
                     </li>
 
+                    @if (auth()->user()->role_id == 1)
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="{{ route('kelas.index') }}">Kelas</a>
                     </li>
@@ -34,21 +35,26 @@
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="">Pengguna</a>
                     </li>
+                    @endif
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Presensi
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Lakukan Presensi</a></li>
-                            <li><a class="dropdown-item" href="#">Daftar Presensi</a></li>
-                            <li><a class="dropdown-item" href="#">Riwayat Presensi</a></li>
+                            @if(auth()->user()->role_id == 5)
+                            <li><a class="dropdown-item" href="{{ route('presensi.create') }}">Lakukan Presensi</a></li>
+                            @endif
+                            <li><a class="dropdown-item" href="{{ route('presensi.index') }}">Daftar Presensi</a></li>
+                            <li><a class="dropdown-item" href="{{ route('presensi.history') }}">Riwayat Presensi</a></li>
                         </ul>
                     </li>
 
+                    @if (auth()->user()->role_id == 4 || auth()->user()->role_id == 5)
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="">Notifikasi</a>
                     </li>
+                    @endif
 
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="{{ route('auth.logout') }}">Keluar</a>

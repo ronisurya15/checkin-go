@@ -23,14 +23,7 @@ class KelasController extends Controller
     {
         Kelas::create($request->all());
 
-        return redirect()->route('kelas.index')->with('success', 'Data kelas berhasil ditambahkan');
-    }
-
-    public function show($id)
-    {
-        $kelas = Kelas::findOrFail($id);
-
-        return view('kelas.show', compact('kelas'));
+        return redirect()->route('kelas.index')->with('success', 'Data kelas berhasil ditambahkan.');
     }
 
     public function edit($id)
@@ -45,13 +38,13 @@ class KelasController extends Controller
         $kelas = Kelas::findOrFail($id);
         $kelas->update($request->all());
 
-        return redirect()->route('kelas.index')->with('success', 'Data kelas berhasil diupdate');
+        return redirect()->route('kelas.index')->with('success', 'Data kelas berhasil diupdate.');
     }
 
     public function destroy($id)
     {
         Kelas::destroy($id);
 
-        return redirect()->route('kelas.index')->with('success', 'Data kelas berhasil dihapus');
+        return redirect()->route('kelas.index')->with('success', 'Data kelas berhasil dihapus.');
     }
 }

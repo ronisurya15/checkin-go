@@ -10,6 +10,7 @@ class Notifikasi extends Model
     use HasFactory;
 
     protected $table = 'notifikasi';
+    protected $casts = ['value' => 'array'];
 
     protected $fillable = [
         'user_id',
@@ -20,10 +21,4 @@ class Notifikasi extends Model
     {
         return $this->belongsTo(User::class);
     }
-    public function index()
-{
-    $notifikasi = Notifikasi::with('user')->get();
-    return view('notifikasi.index', compact('notifikasi'));
-}
-
 }

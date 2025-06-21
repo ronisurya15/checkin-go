@@ -41,4 +41,10 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // atau kalau pakai pivot:
+    public function anak()
+    {
+        return $this->belongsToMany(User::class, 'orang_tua_siswa', 'orang_tua_id', 'siswa_id');
+    }
 }

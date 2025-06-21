@@ -44,6 +44,14 @@ Route::middleware('auth')->group(function () {
         Route::post('/{id}', [KelasController::class, 'update'])->name('kelas.update');
         Route::delete('/{id}', [KelasController::class, 'destroy'])->name('kelas.destroy');
     });
+
+    Route::prefix('presensi')->group(function () {
+        Route::get('/', [PresensiController::class, 'index'])->name('presensi.index');
+        Route::get('riwayat', [PresensiController::class, 'history'])->name('presensi.history');
+        Route::get('/create', [PresensiController::class, 'create'])->name('presensi.create');
+        Route::post('/', [PresensiController::class, 'store'])->name('presensi.store');;
+        Route::delete('/{id}', [PresensiController::class, 'destroy'])->name('presensi.destroy');
+    });
 });
 
 // Resource routes
