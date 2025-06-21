@@ -28,8 +28,17 @@
                     </li>
 
                     @if (auth()->user()->role_id == 1)
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="{{ route('kelas.index') }}">Kelas</a>
+                    <li class="nav-item dropdown">
+                        <!-- <a class="nav-link" aria-current="page" href="{{ route('kelas.index') }}">Kelas</a> -->
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Daftar Pengguna
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="">Tenaga Kependidikan</a></li>
+                            <li><a class="dropdown-item" href="">Guru</a></li>
+                            <li><a class="dropdown-item" href="">Orang Tua</a></li>
+                            <li><a class="dropdown-item" href="">Siswa</a></li>
+                        </ul>
                     </li>
 
                     <li class="nav-item">
