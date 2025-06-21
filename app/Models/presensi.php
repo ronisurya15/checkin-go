@@ -9,9 +9,13 @@ class Presensi extends Model
 {
     use HasFactory;
 
-     protected $table = 'presensi';
+    protected $table = 'presensi';
     protected $fillable = [
-        'user_id', 'kelas_id', 'tanggal', 'waktu_masuk', 'waktu_keluar'
+        'user_id',
+        'kelas_id',
+        'tanggal',
+        'waktu_masuk',
+        'waktu_keluar'
     ];
 
     public function user()
@@ -21,6 +25,6 @@ class Presensi extends Model
 
     public function kelas()
     {
-        return $this->belongsTo(Kelas::class);
+        return $this->belongsTo(Kelas::class)->withTrashed();
     }
 }

@@ -50,9 +50,11 @@
                         </ul>
                     </li>
 
+                    @if (auth()->user()->role_id == 4 || auth()->user()->role_id == 5)
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="">Notifikasi</a>
                     </li>
+                    @endif
 
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="{{ route('auth.logout') }}">Keluar</a>

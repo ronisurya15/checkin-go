@@ -19,6 +19,14 @@ class PresensiController extends Controller
         $presensi = Presensi::with('user', 'kelas')
             ->whereMonth('tanggal', $now->month)
             ->whereYear('tanggal', $now->year)
+            ->when(auth()->user()->role_id == 5, function ($query) {
+                $query->where('user_id', auth()->id());
+            })
+            ->when(auth()->user()->role_id == 4, function ($query) {
+                $childIds = auth()->user()->anak()->pluck('users.id');
+                $query->whereIn('user_id', $childIds);
+            })
+            ->latest()
             ->get();
 
         return view('presensi.index', compact('presensi', 'description'));
@@ -27,7 +35,16 @@ class PresensiController extends Controller
     public function history()
     {
         $description = 'Semua Bulan';
-        $presensi = Presensi::with('user', 'kelas')->get();
+        $presensi = Presensi::with('user', 'kelas')
+            ->when(auth()->user()->role_id == 5, function ($query) {
+                $query->where('user_id', auth()->id());
+            })
+            ->when(auth()->user()->role_id == 4, function ($query) {
+                $childIds = auth()->user()->anak()->pluck('users.id');
+                $query->whereIn('user_id', $childIds);
+            })
+            ->latest()
+            ->get();
 
         return view('presensi.index', compact('presensi', 'description'));
     }
@@ -78,12 +95,12 @@ class PresensiController extends Controller
             ]);
         }
 
-        return redirect()->route('presensi.index')->with('success', 'Presensi berhasil ditambahkan');
+        return redirect()->route('presensi.index')->with('success', 'Presensi berhasil ditambahkan.');
     }
 
     public function destroy($id)
     {
         Presensi::destroy($id);
-        return redirect()->route('presensi.index')->with('success', 'Presensi berhasil dihapus');
+        return redirect()->route('presensi.index')->with('success', 'Presensi berhasil dihapus.');
     }
 }
