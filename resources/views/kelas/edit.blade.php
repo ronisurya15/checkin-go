@@ -6,31 +6,31 @@
         <div class="col-sm-6 col-md-6 col-sm-12 col-12">
             <div class="card">
                 <div class="card-header text-white bg-dark d-flex justify-content-between align-items-center">
-                    <span>Tambah Kelas</span>
+                    <span>Edit Kelas</span>
 
                     <a href="{{ route('kelas.index') }}" class="btn btn-sm btn-warning">Kembali</a>
                 </div>
 
                 <div class="card-body">
-                    <form action="{{ route('kelas.store') }}" method="POST" enctype="multipart/form-data">
+                    <form action="{{ route('kelas.update', $kelas->id) }}" method="POST" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group">
                             <label for="">Jenjang Kelas <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" name="jenjang_kelas" placeholder="Masukkan Jenjang Kelas" required>
+                            <input type="text" class="form-control" name="jenjang_kelas" placeholder="Masukkan Jenjang Kelas" required value="{{ $kelas->jenjang_kelas }}">
                         </div>
 
 
                         <div class="form-group mt-2">
                             <label for="">Lokasi Ruangan <span class="text-danger">*</span></label>
-                            <input type="text" class="form-control" name="lokasi_ruangan" placeholder="Masukkan Ruangan Kelas" required>
+                            <input type="text" class="form-control" name="lokasi_ruangan" placeholder="Masukkan Ruangan Kelas" required value="{{ $kelas->lokasi_ruangan }}">
                         </div>
 
                         <div class="form-group mt-2">
                             <label for="">Status <span class="text-danger">*</span></label>
                             <select name="status" id="" class="form-control">
-                                <option value="Aktif">Aktif</option>
-                                <option value="Non Aktif">Non-Aktif</option>
+                                <option value="Aktif" {{ ($kelas->status == 'Aktif') ? 'selected' : '' }}>Aktif</option>
+                                <option value="Non Aktif" {{ ($kelas->status == 'Non Aktif') ? 'selected' : '' }}>Non-Aktif</option>
                             </select>
                         </div>
 

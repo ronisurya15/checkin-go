@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\RoleController;
@@ -7,6 +8,7 @@ use App\Http\Controllers\KelasController;
 use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\NotifikasiController;
 use App\Http\Controllers\KartuController;
+use App\Models\Kelas;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,13 +22,34 @@ use App\Http\Controllers\KartuController;
 */
 
 Route::get('/', function () {
-    return view('Welcome');
+    return view('welcome');
+});
+
+Route::prefix('auth')->group(function () {
+    Route::get('masuk', [AuthController::class, 'login'])->name('auth.login');
+    Route::post('/', [AuthController::class, 'postSignin'])->name('auth.post_login');
+    Route::get('logout', [AuthController::class, 'logout'])->name('auth.logout');
+});
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('home');
+
+Route::middleware('auth')->group(function () {
+    Route::prefix('kelas')->group(function () {
+        Route::get('/', [KelasController::class, 'index'])->name('kelas.index');
+        Route::get('/create', [KelasController::class, 'create'])->name('kelas.create');
+        Route::post('/', [KelasController::class, 'store'])->name('kelas.store');
+        Route::get('/{id}', [KelasController::class, 'edit'])->name('kelas.edit');
+        Route::post('/{id}', [KelasController::class, 'update'])->name('kelas.update');
+        Route::delete('/{id}', [KelasController::class, 'destroy'])->name('kelas.destroy');
+    });
 });
 
 // Resource routes
-Route::resource('users', UserController::class);
-Route::resource('roles', RoleController::class);
-Route::resource('kelas', KelasController::class);
-Route::resource('presensi', PresensiController::class);
-Route::resource('notifikasi', NotifikasiController::class);
-Route::resource('kartu', KartuController::class);
+// Route::resource('users', UserController::class);
+// Route::resource('roles', RoleController::class);
+// Route::resource('kelas', KelasController::class);
+// Route::resource('presensi', PresensiController::class);
+// Route::resource('notifikasi', NotifikasiController::class);
+// Route::resource('kartu', KartuController::class);

@@ -9,7 +9,8 @@ class KelasController extends Controller
 {
     public function index()
     {
-        $kelas = Kelas::all();
+        $kelas = Kelas::latest()->get();
+
         return view('kelas.index', compact('kelas'));
     }
 
@@ -21,18 +22,21 @@ class KelasController extends Controller
     public function store(Request $request)
     {
         Kelas::create($request->all());
+
         return redirect()->route('kelas.index')->with('success', 'Data kelas berhasil ditambahkan');
     }
 
     public function show($id)
     {
         $kelas = Kelas::findOrFail($id);
+
         return view('kelas.show', compact('kelas'));
     }
 
     public function edit($id)
     {
         $kelas = Kelas::findOrFail($id);
+
         return view('kelas.edit', compact('kelas'));
     }
 
@@ -40,12 +44,14 @@ class KelasController extends Controller
     {
         $kelas = Kelas::findOrFail($id);
         $kelas->update($request->all());
+
         return redirect()->route('kelas.index')->with('success', 'Data kelas berhasil diupdate');
     }
 
     public function destroy($id)
     {
         Kelas::destroy($id);
+
         return redirect()->route('kelas.index')->with('success', 'Data kelas berhasil dihapus');
     }
 }

@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
         // Create Users
         User::create([
             'name' => 'SMK Mekar Arum',
-            'email' => 'admin@gmail.com',
+            'email' => 'adminsekolah',
             'no_hp' => '081222821596',
             'password' => bcrypt('rahasia'),
             'role_id' => 1
@@ -61,7 +61,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name' => 'Solehudin',
-            'email' => 'solehudin@gmail.com',
+            'email' => 'solehudin',
             'no_hp' => '081222821597',
             'password' => bcrypt('rahasia'),
             'role_id' => 2
@@ -69,7 +69,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name' => 'Dadang Iskandar',
-            'email' => 'dadang@gmail.com',
+            'email' => 'dadang',
             'no_hp' => '081222821598',
             'password' => bcrypt('rahasia'),
             'role_id' => 3
@@ -77,7 +77,7 @@ class DatabaseSeeder extends Seeder
 
         User::create([
             'name' => 'Alex Pastor',
-            'email' => 'alex.pastor@gmail.com',
+            'email' => 'alexpastor',
             'no_hp' => '081222821599',
             'password' => bcrypt('rahasia'),
             'role_id' => 3
@@ -85,7 +85,7 @@ class DatabaseSeeder extends Seeder
 
         $ortuSatu = User::create([
             'name' => 'Emilia Az-zahra',
-            'email' => 'emilia.az@gmail.com',
+            'email' => 'emiliaaz',
             'no_hp' => '081222821510',
             'password' => bcrypt('rahasia'),
             'role_id' => 4
@@ -93,7 +93,7 @@ class DatabaseSeeder extends Seeder
 
         $siswaSatu = User::create([
             'name' => 'Seira Az-zahra',
-            'email' => 'seira.az@gmail.com',
+            'email' => 'seiraaz',
             'no_hp' => '081222821511',
             'password' => bcrypt('rahasia'),
             'role_id' => 5
@@ -107,7 +107,7 @@ class DatabaseSeeder extends Seeder
         // Orang tua kedua
         $ortu2 = User::create([
             'name' => 'Rahma Fauziah',
-            'email' => 'rahma.fz@gmail.com',
+            'email' => 'rahma',
             'no_hp' => '081333933920',
             'password' => bcrypt('rahasia'),
             'role_id' => 4
@@ -116,7 +116,7 @@ class DatabaseSeeder extends Seeder
         // Siswa kedua
         $siswa2 = User::create([
             'name' => 'Alya Fauziah',
-            'email' => 'alya.fz@gmail.com',
+            'email' => 'alyafz',
             'no_hp' => '081333933921',
             'password' => bcrypt('rahasia'),
             'role_id' => 5
