@@ -57,4 +57,9 @@ class User extends Authenticatable
             'kelas_id'
         )->withTimestamps();
     }
+
+    public function presensi()
+    {
+        return $this->hasMany(Presensi::class, 'user_id');
+    }
 }

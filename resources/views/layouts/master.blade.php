@@ -64,6 +64,12 @@
                     </li>
                     @endif
 
+                    @if (in_array(auth()->user()->role_id, [1,2,3]))
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{{ route('analisis.index') }}">Analisis Kehadiran</a>
+                    </li>
+                    @endif
+
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="{{ route('auth.logout') }}">Keluar</a>
                     </li>

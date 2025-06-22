@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnalisisPresensiController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
@@ -76,6 +77,10 @@ Route::middleware('auth')->group(function () {
 
         Route::prefix('notifikasi')->group(function () {
             Route::get('/', [NotifikasiController::class, 'index'])->name('notifikasi.index');
+        });
+
+        Route::prefix('analisis')->group(function () {
+            Route::get('/', [AnalisisPresensiController::class, 'index'])->name('analisis.index');
         });
     });
 });
