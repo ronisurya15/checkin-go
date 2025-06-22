@@ -9,7 +9,7 @@
         </div>
         <div class="mt-4">
             <p><strong>CheckIn GO</strong> adalah platform presensi digital yang dirancang khusus untuk sekolah modern yang ingin meningkatkan efisiensi, akurasi, dan keterhubungan antara sekolah, siswa, dan orang tua.</p>
-            <p>Dengan CheckIn GO, Kamu bisa:</p>
+            <p>Dengan CheckIn GO, Kamu bisa :</p>
             <ul>
                 <li>📲 Mencatat kehadiran siswa secara otomatis melalui kartu tap ke mesin presensi</li>
                 <li>📤 Mengirim notifikasi presensi langsung ke orang tua lewat WhatsApp, real-time!</li>
