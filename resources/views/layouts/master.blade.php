@@ -29,7 +29,6 @@
 
                     @if (auth()->user()->role_id == 1)
                     <li class="nav-item dropdown">
-                        <!-- <a class="nav-link" aria-current="page" href="{{ route('kelas.index') }}">Kelas</a> -->
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Daftar Pengguna
                         </a>
@@ -43,7 +42,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="">Pengguna</a>
+                        <a class="nav-link" aria-current="page" href="{{ route('kelas.index') }}">Kelas</a>
                     </li>
                     @endif
 

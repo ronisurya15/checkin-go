@@ -11,17 +11,17 @@
                 </div>
 
                 <div class="card-body">
-                    <form action="{{ route('siswa.store') }}" method="POST">
+                    <form action="{{ route('siswa.update', $user->id) }}" method="POST">
                         @csrf
 
                         <div class="form-group mb-2">
                             <label for="">Nama Pengguna <span class="text-danger">*</span></label>
-                            <input type="text" name="nama_pengguna" class="form-control" required placeholder="Masukkan Nama Pengguna">
+                            <input type="text" name="nama_pengguna" class="form-control" required placeholder="Masukkan Nama Pengguna" value="{{ $user->name }}">
                         </div>
 
                         <div class="form-group mb-2">
                             <label for="">No HP <span class="text-danger">*</span></label>
-                            <input type="number" name="no_hp" class="form-control" required placeholder="Masukkan Nomor HP">
+                            <input type="number" name="no_hp" class="form-control" required placeholder="Masukkan Nomor HP" value="{{ $user->no_hp }}">
                         </div>
 
                         <div class="form-group mb-3">
@@ -29,7 +29,7 @@
                             <select name="kelas_id" class="form-control" required>
                                 <option value="">-- Pilih Kelas --</option>
                                 @foreach($kelas as $item)
-                                <option value="{{ $item->id }}">{{ $item->jenjang_kelas }} - {{ $item->lokasi_ruangan }}</option>
+                                <option value="{{ $item->id }}" {{ ($kelasId == $item->id) ? 'selected' : '' }}>{{ $item->jenjang_kelas }} - {{ $item->lokasi_ruangan }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -39,7 +39,7 @@
                             <select name="orangtua_id" class="form-control" required>
                                 <option value="">-- Pilih Orang Tua --</option>
                                 @foreach($orangTua as $item)
-                                <option value="{{ $item->id }}">{{ $item->name }} - {{ $item->no_hp }}</option>
+                                <option value="{{ $item->id }}" {{ ($orangtuaId == $item->id) ? 'selected' : '' }}>{{ $item->name }} - {{ $item->no_hp }}</option>
                                 @endforeach
                             </select>
                         </div>

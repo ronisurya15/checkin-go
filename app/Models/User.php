@@ -43,8 +43,18 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class, 'orang_tua_siswa', 'orang_tua_id', 'siswa_id');
     }
 
-    function role()
+    public function role()
     {
         return $this->belongsTo(Role::class, 'role_id');
+    }
+
+    public function kelas()
+    {
+        return $this->belongsToMany(
+            Kelas::class,
+            'user_kelas',
+            'user_id',
+            'kelas_id'
+        )->withTimestamps();
     }
 }

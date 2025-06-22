@@ -21,6 +21,9 @@
                         <th>Username</th>
                         <th>No HP</th>
                         <th>Peran</th>
+                        @if ($request->key == 5)
+                        <th>Kelas</th>
+                        @endif
                         <th>Opsi</th>
                     </tr>
                 </thead>
@@ -32,11 +35,20 @@
                         <td>{{ $item->email }}</td>
                         <td>{{ $item->no_hp }}</td>
                         <td>{{ ucfirst($item->role->nama) }}</td>
+                        @if ($request->key == 5)
+                        <td>
+                            @foreach ($item->kelas as $key => $kelas)
+                            @if ($key == (count($item->kelas) - 1))
+                            {{ $kelas->jenjang_kelas }}
+                            @endif
+                            @endforeach
+                        </td>
+                        @endif
                         <td>
                             @if($request->key == 4)
                             <a href="{{ route('orangtua.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
                             @elseif ($request->key == 5)
-                            <a href="" class="btn btn-warning btn-sm">Edit</a>
+                            <a href="{{ route('siswa.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
                             @endif
 
                             <form action="{{ route('user.destroy', $item->id) }}?key={{ $request->key }}" method="POST" class="d-inline delete-form">

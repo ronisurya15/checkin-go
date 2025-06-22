@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kartu;
 use App\Models\User;
-use App\Models\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\Kelas;
+use App\Models\OrangTuaSiswa;
+use App\Models\UserKelas;
 use Str;
 
 class UserController extends Controller
@@ -36,7 +38,6 @@ class UserController extends Controller
         $request->validate([
             'nama_pengguna' => 'required|string|max:255',
             'no_hp' => 'required',
-            'password' => 'required|min:6',
         ]);
 
         // Initialize
@@ -50,7 +51,7 @@ class UserController extends Controller
             'name' => $name,
             'email' => $username,
             'no_hp' => $request->no_hp,
-            'password' => Hash::make($request->password),
+            'password' => Hash::make('rahasia'),
             'role_id' => 4
         ]);
 
@@ -87,84 +88,119 @@ class UserController extends Controller
         return redirect()->route('user.index', 'key=4')->with('success', 'Orang tua berhasil diedit.');
     }
 
-
+    // Siswa
     public function createSiswa()
     {
         $kelas = Kelas::all();
-        return view('users.create_siswa', compact('kelas'));
+        $orangTua = User::where('role_id', 4)->get();
+
+        return view('users.create_siswa', compact('kelas', 'orangTua'));
     }
 
     public function storeSiswa(Request $request)
     {
-        $request->validate([
-            'nama_pengguna' => 'required|string|max:255',
-            'username' => 'required|unique:users',
-            'no_hp' => 'required',
-            'password' => 'required|min:6',
-            'kelas_id' => 'required|exists:kelas,id',
-        ]);
+        // Initialize
+        $name = $request->nama_pengguna;
+        $slug = Str::slug($name);
+        $unique = Str::random(4);
+        $username = $slug . '-' . strtolower($unique);
+        $kelas = Kelas::where('id', $request->kelas_id)->first();
 
-        User::create([
-            'name' => $request->nama_pengguna,
-            'username' => $request->username,
+        $user = User::create([
+            'name' => $name,
+            'email' => $username,
             'no_hp' => $request->no_hp,
-            'password' => Hash::make($request->password),
+            'password' => Hash::make('rahasia'),
             'role_id' => 5,
-            'kelas_id' => $request->kelas_id,
         ]);
 
-        return redirect()->route('users.index')->with('success', 'Siswa berhasil ditambahkan.');
+        // Create User Kelas
+        UserKelas::create([
+            'kelas_id' => $request->kelas_id,
+            'user_id' => $user->id,
+            'tahun_ajaran' => $kelas->tahun_ajaran,
+            'tanggal_masuk' => now(),
+            'tanggal_keluar' => null,
+        ]);
+
+        // Create Kartu
+        Kartu::create([
+            'user_id' => $user->id,
+            'aktif' => 1,
+            'uuid' => Str::uuid(),
+            'expired_at' => now()->addYears(3)
+        ]);
+
+        // Create Orang Tua
+        OrangTuaSiswa::create([
+            'orang_tua_id' => $request->orangtua_id,
+            'siswa_id' => $user->id
+        ]);
+
+        return redirect()->route('user.index', 'key=5')->with('success', 'Siswa berhasil ditambahkan.');
     }
 
-    // public function create()
-    // {
-    //     $roles = Role::all();
-    //     return view('users.create', compact('roles'));
-    // }
+    public function editSiswa($id)
+    {
+        $kelas = Kelas::all();
+        $orangTua = User::where('role_id', 4)->get();
+        $user = User::where('id', $id)->where('role_id', 5)->first();
 
-    // public function store(Request $request)
-    // {
-    //     $request->validate([
-    //         'nama_pengguna' => 'required|string|max:255',
-    //         'username' => 'required|unique:users',
-    //         'no_hp' => 'required',
-    //         'password' => 'required',
-    //         'peran' => 'required'
-    //     ]);
+        if (!$user) {
+            return redirect()->route('user.index', 'key=5')->with('error', 'Pengguna tidak ditemukan.');
+        }
 
-    //     User::create([
-    //         'name' => $request->nama_pengguna,
-    //         'username' => $request->username,
-    //         'no_hp' => $request->no_hp,
-    //         'password' => Hash::make($request->password),
-    //         'peran' => $request->peran,
-    //     ]);
+        // Initialize
+        $kelasId = null;
+        $orangtuaId = OrangTuaSiswa::where('siswa_id', $user->id)->first();
 
-    //     return redirect()->route('users.index');
-    // }
+        if ($orangtuaId) {
+            $orangtuaId = $orangtuaId->orang_tua_id;
+        }
 
-    // public function edit($id)
-    // {
-    //     $user = User::findOrFail($id);
-    //     $roles = Role::all();
-    //     return view('users.edit', compact('user', 'roles'));
-    // }
+        foreach ($user->kelas as $key => $item) {
+            if ($key == (count($user->kelas) - 1)) {
+                $kelasId = $item->id;
+            }
+        }
 
-    // public function update(Request $request, $id)
-    // {
-    //     $user = User::findOrFail($id);
-    //     $user->update([
-    //         'name' => $request->nama_pengguna,
-    //         'username' => $request->username,
-    //         'no_hp' => $request->no_hp,
-    //         'peran' => $request->peran,
-    //     ]);
+        return view('users.edit_siswa', compact('kelas', 'orangTua', 'user', 'kelasId', 'orangtuaId'));
+    }
 
-    //     if ($request->filled('password')) {
-    //         $user->password = Hash::make($request->password);
-    //         $user->save();
-    //     }
+    public function updateSiswa(Request $request, $id)
+    {
+        $user = User::where('id', $id)->where('role_id', 5)->first();
 
-    //     return redirect()->route('users.index');
-    // }
+        if (!$user) {
+            return redirect()->route('user.index', 'key=5')->with('error', 'Pengguna tidak ditemukan.');
+        }
+
+        $name = $request->nama_pengguna;
+        $kelas = Kelas::where('id', $request->kelas_id)->first();
+
+        $user->update([
+            'name' => $name,
+            'no_hp' => $request->no_hp
+        ]);
+
+        // Update Kelas
+        $userKelas = UserKelas::where('user_id', $id)->latest()->first();
+
+        if ($userKelas) {
+            $userKelas->update([
+                'kelas_id' => $request->kelas_id,
+                'tahun_ajaran' => $kelas->tahun_ajaran
+            ]);
+        }
+
+        // Update Orang Tua
+        OrangTuaSiswa::where('siswa_id', $id)->delete();
+
+        OrangTuaSiswa::create([
+            'orang_tua_id' => $request->orangtua_id,
+            'siswa_id' => $user->id
+        ]);
+
+        return redirect()->route('user.index', 'key=5')->with('success', 'Siswa berhasil diedit.');
+    }
 }

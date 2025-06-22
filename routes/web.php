@@ -67,6 +67,8 @@ Route::middleware('auth')->group(function () {
         Route::prefix('siswa')->group(function () {
             Route::get('/create', [UserController::class, 'createSiswa'])->name('siswa.create');
             Route::post('/', [UserController::class, 'storeSiswa'])->name('siswa.store');
+            Route::get('/{id}', [UserController::class, 'editSiswa'])->name('siswa.edit');
+            Route::post('/update/{id}', [UserController::class, 'updateSiswa'])->name('siswa.update');
         });
     });
 });

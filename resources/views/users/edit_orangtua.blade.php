@@ -20,14 +20,7 @@
 
                         <div class="form-group mb-2">
                             <label for="">No HP <span class="text-danger">*</span></label>
-                            <input type="text" name="no_hp" class="form-control" value="{{ $user->no_hp }}" required>
-                        </div>
-
-                        <div class="form-group mb-3">
-                            <label for="">Password</label>
-                            <input type="password" name="password" class="form-control" placeholder="Masukkan Password">
-
-                            <span class="text-info">Kosongkan jika tidak akan di ubah.</span>
+                            <input type="number" name="no_hp" class="form-control" value="{{ $user->no_hp }}" required>
                         </div>
 
                         <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
