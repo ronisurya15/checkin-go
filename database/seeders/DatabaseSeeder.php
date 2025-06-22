@@ -2,14 +2,13 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-
 use App\Models\Kartu;
 use App\Models\Kelas;
 use App\Models\OrangTuaSiswa;
 use App\Models\Role;
 use App\Models\User;
 use App\Models\UserKelas;
+use App\Models\WaliKelas;
 use Illuminate\Database\Seeder;
 use Str;
 
@@ -22,13 +21,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-
         // Create Role
         Role::create([
             'nama' => 'Admin'
@@ -192,5 +184,16 @@ class DatabaseSeeder extends Seeder
                 'expired_at' => now()->addYears(3)
             ]);
         }
+
+        // Wali Kelas
+        WaliKelas::create([
+            'guru_id' => 3,
+            'kelas_id' => 1
+        ]);
+
+        WaliKelas::create([
+            'guru_id' => 4,
+            'kelas_id' => 2
+        ]);
     }
 }

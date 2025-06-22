@@ -7,6 +7,7 @@ use App\Models\OrangTuaSiswa;
 use Illuminate\Http\Request;
 use App\Models\Presensi;
 use App\Models\UserKelas;
+use App\Models\WaliKelas;
 use Carbon\Carbon;
 
 class PresensiController extends Controller
@@ -26,6 +27,12 @@ class PresensiController extends Controller
                 $childIds = auth()->user()->anak()->pluck('users.id');
                 $query->whereIn('user_id', $childIds);
             })
+            ->when(auth()->user()->role_id == 3, function ($query) {
+                $kelasId = WaliKelas::where('guru_id', auth()->id())->value('kelas_id');
+                $siswaIds = UserKelas::where('kelas_id', $kelasId)->pluck('user_id');
+
+                $query->whereIn('user_id', $siswaIds);
+            })
             ->latest()
             ->get();
 
@@ -42,6 +49,12 @@ class PresensiController extends Controller
             ->when(auth()->user()->role_id == 4, function ($query) {
                 $childIds = auth()->user()->anak()->pluck('users.id');
                 $query->whereIn('user_id', $childIds);
+            })
+            ->when(auth()->user()->role_id == 3, function ($query) {
+                $kelasId = WaliKelas::where('guru_id', auth()->id())->value('kelas_id');
+                $siswaIds = UserKelas::where('kelas_id', $kelasId)->pluck('user_id');
+
+                $query->whereIn('user_id', $siswaIds);
             })
             ->latest()
             ->get();
