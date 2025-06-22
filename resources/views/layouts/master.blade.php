@@ -33,12 +33,12 @@
                             Daftar Pengguna
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="">Tenaga Kependidikan</a></li>
-                            <li><a class="dropdown-item" href="">Guru</a></li>
-                            <li><a class="dropdown-item" href="{{ route('user.index') }}?key=4">Orang Tua</a></li>
-                            <li><a class="dropdown-item" href="{{ route('user.index') }}?key=5">Siswa</a></li>
-                        </ul>
-                    </li>
+    <li><a class="dropdown-item" href="{{ route('tendik.create') }}">Tenaga Kependidikan</a></li>
+    <li><a class="dropdown-item" href="{{ route('guru.create') }}">Guru</a></li>
+    <li><a class="dropdown-item" href="{{ route('orangtua.create') }}">Orang Tua</a></li>
+    <li><a class="dropdown-item" href="{{ route('siswa.create') }}">Siswa</a></li>
+</ul>
+
 
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="{{ route('kelas.index') }}">Kelas</a>
