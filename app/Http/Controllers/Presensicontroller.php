@@ -90,7 +90,7 @@ class PresensiController extends Controller
         $tanggal = $request->tanggal;
         $keterangan = (auth()->user()->role_id == 5) ? 'Hadir' : $request->keterangan;
         $checkSiswa = User::where('id', $userId)->first();
-        $namaSiswa = (auth()->user()->role_id == 5) ? auth()->user()->name : $checkSiswa->id;
+        $namaSiswa = (auth()->user()->role_id == 5) ? auth()->user()->name : $checkSiswa->name;
 
         Presensi::updateOrCreate(
             [
@@ -118,7 +118,7 @@ class PresensiController extends Controller
 
         if ($orangTua) {
             Notifikasi::create([
-                'user_id' => $orangTua->id,
+                'user_id' => $orangTua->orang_tua_id,
                 'value' => [
                     'message' => 'Siswa dengan Nama (' . $namaSiswa . ') telah melakukan presensi pada (' . $request->tanggal . ' ' . $request->waktu_masuk . ') dengan keterangan (' . $keterangan . ')'
                 ]
@@ -126,11 +126,5 @@ class PresensiController extends Controller
         }
 
         return redirect()->route('presensi.index')->with('success', 'Presensi berhasil ditambahkan.');
-    }
-
-    public function destroy($id)
-    {
-        Presensi::destroy($id);
-        return redirect()->route('presensi.index')->with('success', 'Presensi berhasil dihapus.');
     }
 }

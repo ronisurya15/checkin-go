@@ -10,7 +10,10 @@ class NotifikasiController extends Controller
 {
     public function index()
     {
-        $notifikasi = Notifikasi::with('user')->get();
+        $notifikasi = Notifikasi::with('user')
+            ->where('user_id', auth()->user()->id)
+            ->latest()
+            ->get();
 
         return view('notifikasi.index', compact('notifikasi'));
     }
