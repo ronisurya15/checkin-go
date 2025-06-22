@@ -16,7 +16,7 @@
                         @method('PUT')
 
                         <div class="form-group">
-                            <label>Nama Pengguna <span class="text-danger">*</span></label>
+                            <label>Nama <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" name="nama_pengguna" required value="{{ $user->name }}">
                         </div>
 
@@ -39,9 +39,9 @@
                             <label>Peran <span class="text-danger">*</span></label>
                             <select name="peran" class="form-control" required>
                                 @foreach ($roles as $role)
-                                    <option value="{{ $role->nama }}" {{ $user->peran == $role->nama ? 'selected' : '' }}>
-                                        {{ ucfirst($role->nama) }}
-                                    </option>
+                                <option value="{{ $role->nama }}" {{ $user->peran == $role->nama ? 'selected' : '' }}>
+                                    {{ ucfirst($role->nama) }}
+                                </option>
                                 @endforeach
                             </select>
                         </div>

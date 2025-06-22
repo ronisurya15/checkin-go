@@ -15,13 +15,13 @@
                         @csrf
 
                         <div class="form-group mb-2">
-                            <label for="">Nama Pengguna <span class="text-danger">*</span></label>
-                            <input type="text" name="nama_pengguna" class="form-control" required>
+                            <label for="">Nama <span class="text-danger">*</span></label>
+                            <input type="text" name="nama_pengguna" class="form-control" required placeholder="Masukkan Nama">
                         </div>
 
                         <div class="form-group mb-2">
                             <label for="">No HP <span class="text-danger">*</span></label>
-                            <input type="number" name="no_hp" class="form-control" required>
+                            <input type="number" name="no_hp" class="form-control" required placeholder="Masukkan Nomor HP">
                         </div>
 
                         <button type="submit" class="btn btn-primary btn-sm">Simpan</button>

@@ -33,8 +33,8 @@
                             Daftar Pengguna
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="">Tenaga Kependidikan</a></li>
-                            <li><a class="dropdown-item" href="">Guru</a></li>
+                            <li><a class="dropdown-item" href="{{ route('user.index') }}?key=2">Tenaga Kependidikan</a></li>
+                            <li><a class="dropdown-item" href="{{ route('user.index') }}?key=3">Guru</a></li>
                             <li><a class="dropdown-item" href="{{ route('user.index') }}?key=4">Orang Tua</a></li>
                             <li><a class="dropdown-item" href="{{ route('user.index') }}?key=5">Siswa</a></li>
                         </ul>

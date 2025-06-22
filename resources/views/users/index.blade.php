@@ -5,7 +5,11 @@
     <div class="card">
         <div class="card-header text-white bg-dark d-flex justify-content-between align-items-center">
             <span>Daftar Pengguna</span>
-            @if ($request->key == 4)
+            @if ($request->key == 2)
+            <a href="{{ route('orangtua.create') }}" class="btn btn-sm btn-primary">Tambah</a>
+            @elseif ($request->key == 3)
+            <a href="{{ route('guru.create') }}" class="btn btn-sm btn-primary">Tambah</a>
+            @elseif ($request->key == 4)
             <a href="{{ route('orangtua.create') }}" class="btn btn-sm btn-primary">Tambah</a>
             @elseif ($request->key == 5)
             <a href="{{ route('siswa.create') }}" class="btn btn-sm btn-primary">Tambah</a>
@@ -49,6 +53,8 @@
                             <a href="{{ route('orangtua.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
                             @elseif ($request->key == 5)
                             <a href="{{ route('siswa.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                            @elseif ($request->key == 3)
+                            <a href="{{ route('guru.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
                             @endif
 
                             <form action="{{ route('user.destroy', $item->id) }}?key={{ $request->key }}" method="POST" class="d-inline delete-form">

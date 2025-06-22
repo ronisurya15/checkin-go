@@ -75,6 +75,13 @@ Route::middleware('auth')->group(function () {
             Route::post('/update/{id}', [UserController::class, 'updateSiswa'])->name('siswa.update');
         });
 
+        Route::prefix('guru')->group(function () {
+            Route::get('/create', [UserController::class, 'createGuru'])->name('guru.create');
+            Route::post('/', [UserController::class, 'storeGuru'])->name('guru.store');
+            Route::get('/{id}', [UserController::class, 'editGuru'])->name('guru.edit');
+            Route::post('/update/{id}', [UserController::class, 'updateGuru'])->name('guru.update');
+        });
+
         Route::prefix('notifikasi')->group(function () {
             Route::get('/', [NotifikasiController::class, 'index'])->name('notifikasi.index');
         });

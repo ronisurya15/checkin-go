@@ -6,7 +6,7 @@
         <div class="col-sm-6 col-md-6 col-12">
             <div class="card">
                 <div class="card-header text-white bg-dark d-flex justify-content-between align-items-center">
-                    <span>Tambah Pengguna: Siswa</span>
+                    <span>Edit Pengguna : Siswa</span>
                     <a href="{{ route('user.index') }}?key=5" class="btn btn-sm btn-warning">Kembali</a>
                 </div>
 
@@ -15,7 +15,7 @@
                         @csrf
 
                         <div class="form-group mb-2">
-                            <label for="">Nama Pengguna <span class="text-danger">*</span></label>
+                            <label for="">Nama <span class="text-danger">*</span></label>
                             <input type="text" name="nama_pengguna" class="form-control" required placeholder="Masukkan Nama Pengguna" value="{{ $user->name }}">
                         </div>
 

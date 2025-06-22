@@ -15,7 +15,7 @@
                         @csrf
 
                         <div class="form-group mb-2">
-                            <label for="">Nama Pengguna <span class="text-danger">*</span></label>
+                            <label for="">Nama <span class="text-danger">*</span></label>
                             <input type="text" name="nama_pengguna" class="form-control" required placeholder="Masukkan Nama Pengguna">
                         </div>
 

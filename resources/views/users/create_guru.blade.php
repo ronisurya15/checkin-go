@@ -6,21 +6,21 @@
         <div class="col-sm-6 col-md-6 col-12">
             <div class="card">
                 <div class="card-header text-white bg-dark d-flex justify-content-between align-items-center">
-                    <span>Edit Pengguna : Orang Tua</span>
-                    <a href="{{ route('user.index') }}?key=4" class="btn btn-sm btn-warning">Kembali</a>
+                    <span>Tambah Pengguna : Guru</span>
+                    <a href="{{ route('user.index') }}?key=3" class="btn btn-sm btn-warning">Kembali</a>
                 </div>
 
                 <div class="card-body">
-                    <form action="{{ route('orangtua.update', $user->id) }}" method="POST">
+                    <form action="{{ route('guru.store') }}" method="POST">
                         @csrf
                         <div class="form-group mb-2">
                             <label for="">Nama <span class="text-danger">*</span></label>
-                            <input type="text" name="nama_pengguna" class="form-control" value="{{ $user->name }}" required>
+                            <input type="text" name="nama_pengguna" class="form-control" required placeholder="Masukkan Nama">
                         </div>
 
                         <div class="form-group mb-2">
                             <label for="">No HP <span class="text-danger">*</span></label>
-                            <input type="number" name="no_hp" class="form-control" value="{{ $user->no_hp }}" required>
+                            <input type="number" name="no_hp" class="form-control" required placeholder="Masukkan Nomor HP">
                         </div>
 
                         <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
