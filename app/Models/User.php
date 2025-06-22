@@ -57,4 +57,6 @@ class User extends Authenticatable
             'kelas_id'
         )->withTimestamps();
     }
+
+    
 }

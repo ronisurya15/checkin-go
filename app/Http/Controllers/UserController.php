@@ -203,4 +203,32 @@ class UserController extends Controller
 
         return redirect()->route('user.index', 'key=5')->with('success', 'Siswa berhasil diedit.');
     }
+
+    public function profil()
+    {
+        $user = auth()->user();
+        return view('users.profil', compact('user'));
+    }
+
+    public function updateProfil(Request $request)
+    {
+        $user = auth()->user();
+
+        $request->validate([
+            'username' => 'required|string|unique:users,username,' . $user->id,
+            'no_hp' => 'required|string',
+            'password' => 'nullable|string|min:6',
+        ]);
+
+        $user->username = $request->username;
+        $user->no_hp = $request->no_hp;
+
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password);
+        }
+        
+        $user->save();
+
+        return redirect()->route('profil')->with('success', 'Profil berhasil diperbarui.');
+    }
 }
