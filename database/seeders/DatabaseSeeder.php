@@ -75,6 +75,14 @@ class DatabaseSeeder extends Seeder
             'role_id' => 3
         ]);
 
+        User::create([
+            'name' => 'David Beckham',
+            'email' => 'davidbackham',
+            'no_hp' => '08122282100',
+            'password' => bcrypt('rahasia'),
+            'role_id' => 3
+        ]);
+
         $ortuSatu = User::create([
             'name' => 'Emilia Az-zahra',
             'email' => 'emiliaaz',
@@ -135,26 +143,26 @@ class DatabaseSeeder extends Seeder
             'tahun_ajaran' => '2024/2025'
         ]);
 
-        Kelas::create([
-            'jenjang_kelas' => 'XI IPS 1',
-            'lokasi_ruangan' => 'Gedung A - Lantai 1',
-            'status' => 'Aktif',
-            'tahun_ajaran' => '2024/2025',
-        ]);
+        // Kelas::create([
+        //     'jenjang_kelas' => 'XI IPS 1',
+        //     'lokasi_ruangan' => 'Gedung A - Lantai 1',
+        //     'status' => 'Aktif',
+        //     'tahun_ajaran' => '2024/2025',
+        // ]);
 
-        Kelas::create([
-            'jenjang_kelas' => 'XI IPS 2',
-            'lokasi_ruangan' => 'Gedung B - Lantai 1',
-            'status' => 'Aktif',
-            'tahun_ajaran' => '2024/2025',
-        ]);
+        // Kelas::create([
+        //     'jenjang_kelas' => 'XI IPS 2',
+        //     'lokasi_ruangan' => 'Gedung B - Lantai 1',
+        //     'status' => 'Aktif',
+        //     'tahun_ajaran' => '2024/2025',
+        // ]);
 
-        Kelas::create([
-            'jenjang_kelas' => 'XII Bahasa',
-            'lokasi_ruangan' => 'Gedung C - Lantai 3',
-            'status' => 'Non Aktif',
-            'tahun_ajaran' => '2023/2024',
-        ]);
+        // Kelas::create([
+        //     'jenjang_kelas' => 'XII Bahasa',
+        //     'lokasi_ruangan' => 'Gedung C - Lantai 3',
+        //     'status' => 'Non Aktif',
+        //     'tahun_ajaran' => '2023/2024',
+        // ]);
 
         // Create User Kelas
         UserKelas::create([

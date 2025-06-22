@@ -17,6 +17,7 @@
                         <th>Lokasi Ruangan</th>
                         <th>Status</th>
                         <th>Tahun Ajaran</th>
+                        <th>Wali Kelas</th>
                         <th>Opsi</th>
                     </tr>
                 </thead>
@@ -28,6 +29,7 @@
                         <td>{{ $item->lokasi_ruangan }}</td>
                         <td>{{ $item->status }}</td>
                         <td>{{ $item->tahun_ajaran }}</td>
+                        <td>{{ optional(optional($item->waliKelas)->guru)->name ?? '-' }}</td>
                         <td>
                             <a href="{{ route('kelas.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
 

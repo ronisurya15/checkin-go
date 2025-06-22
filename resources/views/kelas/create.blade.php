@@ -38,6 +38,16 @@
                             <input type="text" class="form-control" name="tahun_ajaran" required readonly>
                         </div>
 
+                        <div class="form-group mt-2">
+                            <label for="">Wali Kelas <span class="text-danger">*</span></label>
+                            <select name="wali_kelas" id="" class="form-control" required>
+                                <option value="">-- Pilih Wali Kelas --</option>
+                                @foreach ($waliKelas as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
                         <div class="mt-2 mb-2">
                             <hr>
                         </div>

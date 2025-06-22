@@ -20,6 +20,7 @@ return new class extends Migration
             $table->date('tanggal');
             $table->time('waktu_masuk')->nullable();
             $table->time('waktu_keluar')->nullable();
+            $table->enum('keterangan', ['Hadir', 'Izin', 'Sakit', 'Tanpa Keterangan'])->nullable();
             $table->timestamps();
         });
     }

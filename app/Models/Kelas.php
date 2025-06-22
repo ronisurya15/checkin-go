@@ -27,4 +27,9 @@ class Kelas extends Model
     {
         return $this->hasMany(Presensi::class);
     }
+
+    public function waliKelas()
+    {
+        return $this->hasOne(WaliKelas::class, 'kelas_id');
+    }
 }

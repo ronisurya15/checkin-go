@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Kelas;
+use App\Models\User;
+use App\Models\WaliKelas;
 
 class KelasController extends Controller
 {
@@ -16,27 +18,41 @@ class KelasController extends Controller
 
     public function create()
     {
-        return view('kelas.create');
+        $waliKelas = User::where('role_id', 3)->get();
+
+        return view('kelas.create', compact('waliKelas'));
     }
 
     public function store(Request $request)
     {
-        Kelas::create($request->all());
+        $kelas = Kelas::create($request->all());
+
+        // Create Wali Kelas
+        WaliKelas::create([
+            'kelas_id' => $kelas->id,
+            'guru_id' => $request->wali_kelas
+        ]);
 
         return redirect()->route('kelas.index')->with('success', 'Data kelas berhasil ditambahkan.');
     }
 
     public function edit($id)
     {
-        $kelas = Kelas::findOrFail($id);
+        $kelas = Kelas::with('waliKelas')->findOrFail($id);
+        $waliKelas = User::where('role_id', 3)->get();
 
-        return view('kelas.edit', compact('kelas'));
+        return view('kelas.edit', compact('kelas', 'waliKelas'));
     }
 
     public function update(Request $request, $id)
     {
         $kelas = Kelas::findOrFail($id);
         $kelas->update($request->all());
+
+        // Update Wali Kelas
+        WaliKelas::where('kelas_id', $id)->update([
+            'guru_id' => $request->wali_kelas
+        ]);
 
         return redirect()->route('kelas.index')->with('success', 'Data kelas berhasil diupdate.');
     }
