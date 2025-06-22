@@ -5,7 +5,11 @@
     <div class="card">
         <div class="card-header text-white bg-dark d-flex justify-content-between align-items-center">
             <span>Daftar Pengguna</span>
-            <a href="{{ route('users.create') }}" class="btn btn-sm btn-primary">Tambah</a>
+            @if ($request->key == 4)
+            <a href="{{ route('orangtua.create') }}" class="btn btn-sm btn-primary">Tambah</a>
+            @elseif ($request->key == 5)
+            <a href="{{ route('siswa.create') }}" class="btn btn-sm btn-primary">Tambah</a>
+            @endif
         </div>
 
         <div class="card-body">
@@ -25,12 +29,17 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $item->name }}</td>
-                        <td>{{ $item->username }}</td>
+                        <td>{{ $item->email }}</td>
                         <td>{{ $item->no_hp }}</td>
-                        <td>{{ ucfirst($item->peran) }}</td>
+                        <td>{{ ucfirst($item->role->nama) }}</td>
                         <td>
-                            <a href="{{ route('users.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                            <form action="{{ route('users.destroy', $item->id) }}" method="POST" class="d-inline delete-form">
+                            @if($request->key == 4)
+                            <a href="{{ route('orangtua.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                            @elseif ($request->key == 5)
+                            <a href="" class="btn btn-warning btn-sm">Edit</a>
+                            @endif
+
+                            <form action="{{ route('user.destroy', $item->id) }}?key={{ $request->key }}" method="POST" class="d-inline delete-form">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm show-confirm">Hapus</button>

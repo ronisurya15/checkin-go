@@ -11,22 +11,23 @@
                 </div>
 
                 <div class="card-body">
-                    <form action="{{ route('orangtua.store') }}" method="POST">
+                    <form action="{{ route('orangtua.update', $user->id) }}" method="POST">
                         @csrf
-
                         <div class="form-group mb-2">
                             <label for="">Nama Pengguna <span class="text-danger">*</span></label>
-                            <input type="text" name="nama_pengguna" class="form-control" required>
+                            <input type="text" name="nama_pengguna" class="form-control" value="{{ $user->name }}" required>
                         </div>
 
                         <div class="form-group mb-2">
                             <label for="">No HP <span class="text-danger">*</span></label>
-                            <input type="text" name="no_hp" class="form-control" required>
+                            <input type="text" name="no_hp" class="form-control" value="{{ $user->no_hp }}" required>
                         </div>
 
                         <div class="form-group mb-3">
-                            <label for="">Password <span class="text-danger">*</span></label>
-                            <input type="password" name="password" class="form-control" required>
+                            <label for="">Password</label>
+                            <input type="password" name="password" class="form-control" placeholder="Masukkan Password">
+
+                            <span class="text-info">Kosongkan jika tidak akan di ubah.</span>
                         </div>
 
                         <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
