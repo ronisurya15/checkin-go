@@ -48,3 +48,9 @@ php artisan storage:link
 ```
 php artisan migrate --seed
 ```
+
+## 8. Jalankan Aplikasi
+
+```
+php artisan serve
+```
