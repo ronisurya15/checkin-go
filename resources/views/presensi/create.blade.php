@@ -17,6 +17,48 @@
                     @else
                     <form action="{{ route('presensi.store') }}" method="POST">
                         @csrf
+
+                        @if (auth()->user()->role_id == 3)
+                        <div class="form-group mt-2">
+                            <label for="">Siswa <span class="text-danger">*</span></label>
+                            <select name="user_id" id="" class="form-control">
+                                <option value="">-- Pilih --</option>
+                                @foreach ($siswa as $item)
+                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <label for="">Keterangan <span class="text-danger">*</span></label>
+                            <br>
+                            <input type="radio" name="keterangan" value="Hadir"> Hadir
+                            <input type="radio" name="keterangan" value="Izin"> Izin
+                            <input type="radio" name="keterangan" value="Sakit"> Sakit
+                            <input type="radio" name="keterangan" value="Tanpa Keterangan"> Tanpa Keterangan
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <label for="">Tanggal <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="tanggal" id="inputTanggal" required readonly>
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <label for="">Jam Masuk <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="waktu_masuk" id="inputMasuk" readonly>
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <label for="">Jam Pulang <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control" name="waktu_keluar" id="inputKeluar" readonly>
+                        </div>
+
+                        <div class="mt-2 mb-2">
+                            <hr>
+                        </div>
+
+                        <button type="submit" class="btn btn-sm btn-primary">Simpan</button>
+                        @else
                         <div class="form-group mt-2">
                             <label for="">Tanggal <span class="text-danger">*</span></label>
                             <input type="text" class="form-control" name="tanggal" id="inputTanggal" required readonly>
@@ -47,6 +89,7 @@
                         </div>
 
                         <button type="submit" class="btn btn-sm btn-warning">Check Out</button>
+                        @endif
                         @endif
                     </form>
                     @endif

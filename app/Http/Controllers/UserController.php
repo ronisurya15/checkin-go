@@ -91,7 +91,7 @@ class UserController extends Controller
     // Siswa
     public function createSiswa()
     {
-        $kelas = Kelas::all();
+        $kelas = Kelas::where('status', 'Aktif')->get();
         $orangTua = User::where('role_id', 4)->get();
 
         return view('users.create_siswa', compact('kelas', 'orangTua'));
@@ -142,7 +142,7 @@ class UserController extends Controller
 
     public function editSiswa($id)
     {
-        $kelas = Kelas::all();
+        $kelas = Kelas::where('status', 'Aktif')->get();
         $orangTua = User::where('role_id', 4)->get();
         $user = User::where('id', $id)->where('role_id', 5)->first();
 

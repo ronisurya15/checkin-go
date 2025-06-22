@@ -19,6 +19,7 @@
                         <th>Waktu Masuk</th>
                         <th>Waktu Keluar</th>
                         <th>Kelas</th>
+                        <th>Keterangan</th>
                         <th>Tahun Ajaran</th>
                     </tr>
                 </thead>
@@ -33,6 +34,7 @@
                         <td>{{ $item->waktu_masuk }}</td>
                         <td>{{ ($item->waktu_keluar) ? $item->waktu_keluar : '-' }}</td>
                         <td>{{ $item->kelas->jenjang_kelas }}</td>
+                        <td>{{ $item->keterangan }}</td>
                         <td>{{ $item->kelas->tahun_ajaran }}</td>
                     </tr>
                     @endforeach

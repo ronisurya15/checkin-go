@@ -37,7 +37,6 @@
                             <li><a class="dropdown-item" href="">Guru</a></li>
                             <li><a class="dropdown-item" href="{{ route('user.index') }}?key=4">Orang Tua</a></li>
                             <li><a class="dropdown-item" href="{{ route('user.index') }}?key=5">Siswa</a></li>
-
                         </ul>
                     </li>
 
@@ -51,7 +50,7 @@
                             Presensi
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            @if(auth()->user()->role_id == 5)
+                            @if(auth()->user()->role_id == 5 || auth()->user()->role_id == 3)
                             <li><a class="dropdown-item" href="{{ route('presensi.create') }}">Lakukan Presensi</a></li>
                             @endif
                             <li><a class="dropdown-item" href="{{ route('presensi.index') }}">Daftar Presensi</a></li>
@@ -61,7 +60,7 @@
 
                     @if (auth()->user()->role_id == 4 || auth()->user()->role_id == 5)
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="">Notifikasi</a>
+                        <a class="nav-link" aria-current="page" href="{{ route('notifikasi.index') }}">Notifikasi</a>
                     </li>
                     @endif
 

@@ -3,12 +3,9 @@
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\RoleController;
 use App\Http\Controllers\KelasController;
-use App\Http\Controllers\PresensiController;
 use App\Http\Controllers\NotifikasiController;
-use App\Http\Controllers\KartuController;
-use App\Models\Kelas;
+use App\Http\Controllers\PresensiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,6 +66,10 @@ Route::middleware('auth')->group(function () {
             Route::post('/', [UserController::class, 'storeSiswa'])->name('siswa.store');
             Route::get('/{id}', [UserController::class, 'editSiswa'])->name('siswa.edit');
             Route::post('/update/{id}', [UserController::class, 'updateSiswa'])->name('siswa.update');
+        });
+
+        Route::prefix('notifikasi')->group(function () {
+            Route::get('/', [NotifikasiController::class, 'index'])->name('notifikasi.index');
         });
     });
 });

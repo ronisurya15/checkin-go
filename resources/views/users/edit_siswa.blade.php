@@ -29,7 +29,7 @@
                             <select name="kelas_id" class="form-control" required>
                                 <option value="">-- Pilih Kelas --</option>
                                 @foreach($kelas as $item)
-                                <option value="{{ $item->id }}" {{ ($kelasId == $item->id) ? 'selected' : '' }}>{{ $item->jenjang_kelas }} - {{ $item->lokasi_ruangan }}</option>
+                                <option value="{{ $item->id }}" {{ ($kelasId == $item->id) ? 'selected' : '' }}>{{ $item->jenjang_kelas }} - Wali Kelas : {{ $item->waliKelas->guru->name }}</option>
                                 @endforeach
                             </select>
                         </div>
