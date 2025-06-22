@@ -17,13 +17,16 @@ class AnalisisPresensiController extends Controller
             $izin = $user->presensi()->where('keterangan', 'Izin')->count();
             $sakit = $user->presensi()->where('keterangan', 'Sakit')->count();
             $tanpa = $user->presensi()->where('keterangan', 'Tanpa Keterangan')->count();
+            $total = ($hadir + $izin + $sakit + $tanpa);
+            $persentase = $total > 0 ? round(($hadir / $total) * 100, 2) : 0;
 
             $row['presensi'] = [
                 'hadir' => $hadir,
                 'izin' => $izin,
                 'sakit' => $sakit,
                 'tanpa' => $tanpa,
-                'total' => ($hadir + $izin + $sakit + $tanpa)
+                'total' => $total,
+                'persentase' => $persentase
             ];
 
             $row['siswa'] = [

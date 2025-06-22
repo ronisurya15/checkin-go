@@ -18,6 +18,7 @@
                         <th>Sakit</th>
                         <th>Tanpa Keterangan</th>
                         <th>Total</th>
+                        <th>Persentase Kehadiran</th>
                         <th>Kelas</th>
                         <th>Tahun Ajaran</th>
                     </tr>
@@ -32,6 +33,7 @@
                         <td>{{ $item['presensi']['sakit'] }}</td>
                         <td>{{ $item['presensi']['tanpa'] }}</td>
                         <td>{{ $item['presensi']['total'] }}</td>
+                        <td>{{ $item['presensi']['persentase'] }}</td>
                         <td>{{ $item['kelas']->jenjang_kelas }}</td>
                         <td>{{ $item['kelas']->tahun_ajaran }}</td>
                     </tr>
