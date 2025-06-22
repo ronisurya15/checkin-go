@@ -255,4 +255,56 @@ class UserController extends Controller
 
         return redirect()->route('user.index', 'key=3')->with('success', 'Guru berhasil diedit.');
     }
+
+    // Tenaga Kependidikan
+    public function createTU()
+    {
+        return view('users.create_tu');
+    }
+
+    public function storeTU(Request $request)
+    {
+        // Initialize
+        $name = $request->nama_pengguna;
+        $slug = Str::slug($name);
+        $unique = Str::random(4);
+        $username = $slug . '-' . strtolower($unique);
+
+        User::create([
+            'name' => $name,
+            'email' => $username,
+            'no_hp' => $request->no_hp,
+            'password' => Hash::make('rahasia'),
+            'role_id' => 2
+        ]);
+
+        return redirect()->route('user.index', 'key=2')->with('success', 'Guru berhasil ditambahkan.');
+    }
+
+    public function editTU($id)
+    {
+        $user = User::where('id', $id)->where('role_id', 2)->first();
+
+        if (!$user) {
+            return redirect()->route('user.index', 'key=2')->with('error', 'Pengguna tidak ditemukan.');
+        }
+
+        return view('users.edit_tu', compact('user'));
+    }
+
+    public function updateTU(Request $request, $id)
+    {
+        $user = User::where('id', $id)->where('role_id', 2)->first();
+
+        if (!$user) {
+            return redirect()->route('user.index', 'key=2')->with('error', 'Pengguna tidak ditemukan.');
+        }
+
+        $user->update([
+            'name' => $request->nama_pengguna,
+            'no_hp' => $request->no_hp
+        ]);
+
+        return redirect()->route('user.index', 'key=2')->with('success', 'Guru berhasil diedit.');
+    }
 }

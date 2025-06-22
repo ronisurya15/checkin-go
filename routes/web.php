@@ -82,6 +82,13 @@ Route::middleware('auth')->group(function () {
             Route::post('/update/{id}', [UserController::class, 'updateGuru'])->name('guru.update');
         });
 
+        Route::prefix('tu')->group(function () {
+            Route::get('/create', [UserController::class, 'createTU'])->name('tu.create');
+            Route::get('/{id}', [UserController::class, 'editTU'])->name('tu.edit');
+            Route::post('/', [UserController::class, 'storeTU'])->name('tu.store');
+            Route::post('/update/{id}', [UserController::class, 'updateTU'])->name('tu.update');
+        });
+
         Route::prefix('notifikasi')->group(function () {
             Route::get('/', [NotifikasiController::class, 'index'])->name('notifikasi.index');
         });
