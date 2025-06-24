@@ -72,6 +72,22 @@ Route::middleware('auth')->group(function () {
         Route::prefix('notifikasi')->group(function () {
             Route::get('/', [NotifikasiController::class, 'index'])->name('notifikasi.index');
         });
+
+        Route::prefix('guru')->group(function () {
+            Route::get('/create', [UserController::class, 'createGuru'])->name('guru.create');
+            Route::post('/', [UserController::class, 'storeGuru'])->name('guru.store');
+        Route::post('/update/{id}', [UserController::class, 'updateGuru'])->name('guru.update');
+
+        });
+
+        Route::prefix('tenaga-kependidikan')->group(function () {
+            Route::get('/create', [UserController::class, 'createTendik'])->name('tendik.create');
+            Route::post('/', [UserController::class, 'storeTendik'])->name('tendik.store');
+            Route::post('/update/{id}', [UserController::class, 'updateTendik'])->name('Tendik.update');
+        });
+        
+        
+        
     });
 });
 
