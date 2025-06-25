@@ -24,7 +24,7 @@
 
                     @if (auth()->check())
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="">Profil</a>
+                        <a class="nav-link" aria-current="page" href="{{ route('profil') }}">Profil</a>
                     </li>
 
                     @if (auth()->user()->role_id == 1)

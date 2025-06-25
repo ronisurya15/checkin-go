@@ -95,6 +95,11 @@ Route::middleware('auth')->group(function () {
     });
 });
 
+Route::middleware('auth')->group(function () {
+    Route::get('/profil', [UserController::class, 'profil'])->name('profil');
+    Route::post('/profil', [UserController::class, 'updateProfil'])->name('profil.update');
+});
+
 // Resource routes
 // Route::resource('users', UserController::class);
 // Route::get('login', [AuthController::class, 'login'])->name('login');

@@ -205,55 +205,82 @@ class UserController extends Controller
 
         return redirect()->route('user.index', 'key=5')->with('success', 'Siswa berhasil diedit.');
     }
+    public function profil()
+    {
+        $user = auth()->user();
+        return view('users.profil', compact('user'));
+    }
+
+    public function updateProfil(Request $request)
+    {
+        $user = auth()->user();
+
+        $request->validate([
+            'username' => 'required|string|unique:users,username,' . $user->id,
+            'no_hp' => 'required|string',
+            'password' => 'nullable|string|min:6',
+        ]);
+
+        $user->username = $request->username;
+        $user->no_hp = $request->no_hp;
+
+        if ($request->filled('password')) {
+            $user->password = Hash::make($request->password);
+        }
+        
+        $user->save();
+
+        return redirect()->route('profil')->with('success', 'Profil berhasil diperbarui.');
+    }
+
     public function createGuru()
-{
-    return view('users.create_guru');
-}
+    {
+        return view('users.create_guru');
+    }
 
-public function storeGuru(Request $request)
-{
-    $request->validate([
-        'nama_pengguna' => 'required|string|max:255',
-        'username' => 'required|unique:users',
-        'no_hp' => 'required',
-        'password' => 'required|min:6',
-    ]);
+    public function storeGuru(Request $request)
+    {
+        $request->validate([
+            'nama_pengguna' => 'required|string|max:255',
+            'username' => 'required|unique:users',
+            'no_hp' => 'required',
+            'password' => 'required|min:6',
+        ]);
 
-    User::create([
-        'name' => $request->nama_pengguna,
-        'username' => $request->username,
-        'no_hp' => $request->no_hp,
-        'password' => Hash::make($request->password),
-        'peran' => 'Guru',
-    ]);
+        User::create([
+            'name' => $request->nama_pengguna,
+            'username' => $request->username,
+            'no_hp' => $request->no_hp,
+            'password' => Hash::make($request->password),
+            'peran' => 'Guru',
+        ]);
 
-    return redirect()->route('users.index')->with('success', 'Guru berhasil ditambahkan.');
-}
+        return redirect()->route('users.index')->with('success', 'Guru berhasil ditambahkan.');
+    }
 
-public function createTendik()
-{
-    return view('users.create_tendik');
-}
+    public function createTendik()
+    {
+        return view('users.create_tendik');
+    }
 
-public function storeTendik(Request $request)
-{
-    $request->validate([
-        'nama_pengguna' => 'required|string|max:255',
-        'username' => 'required|unique:users',
-        'no_hp' => 'required',
-        'password' => 'required|min:6',
-    ]);
+    public function storeTendik(Request $request)
+    {
+        $request->validate([
+            'nama_pengguna' => 'required|string|max:255',
+            'username' => 'required|unique:users',
+            'no_hp' => 'required',
+            'password' => 'required|min:6',
+        ]);
 
-    User::create([
-        'name' => $request->nama_pengguna,
-        'username' => $request->username,
-        'no_hp' => $request->no_hp,
-        'password' => Hash::make($request->password),
-        'peran' => 'Tenaga Kependidikan',
-    ]);
+        User::create([
+            'name' => $request->nama_pengguna,
+            'username' => $request->username,
+            'no_hp' => $request->no_hp,
+            'password' => Hash::make($request->password),
+            'peran' => 'Tenaga Kependidikan',
+        ]);
 
-    return redirect()->route('users.index')->with('success', 'Tenaga kependidikan berhasil ditambahkan.');
-}
-
+        return redirect()->route('users.index')->with('success', 'Tenaga kependidikan berhasil ditambahkan.');
+    }
 
 }
