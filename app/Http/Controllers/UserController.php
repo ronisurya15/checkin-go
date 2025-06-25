@@ -33,12 +33,14 @@ class UserController extends Controller
         return view('users.create_orangtua');
     }
 
-    public function storeOrangtua(Request $request)
-    {
-        $request->validate([
-            'nama_pengguna' => 'required|string|max:255',
-            'no_hp' => 'required',
-        ]);
+   public function storeOrangtua(Request $request)
+{
+    $request->validate([
+        'nama_pengguna' => 'required|string|max:255',
+        'username' => 'required',
+        'no_hp' => 'required',
+        'password' => 'required|min:6',
+    ]);
 
         // Initialize
         $name = $request->nama_pengguna;

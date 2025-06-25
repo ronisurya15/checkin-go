@@ -13,15 +13,15 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('wali_kelas', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('guru_id');
-            $table->unsignedBigInteger('kelas_id');
-            $table->timestamps();
+       Schema::create('wali_kelas', function (Blueprint $table) {
+        $table->id();
+        $table->unsignedBigInteger('user_id');   // id guru/wali
+        $table->unsignedBigInteger('kelas_id');  // id kelas
+        $table->timestamps();
 
-            $table->foreign('guru_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('kelas_id')->references('id')->on('kelas')->onDelete('cascade');
-        });
+        $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        $table->foreign('kelas_id')->references('id')->on('kelas')->onDelete('cascade');
+    });
     }
 
     /**

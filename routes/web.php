@@ -86,7 +86,11 @@ Route::middleware('auth')->group(function () {
             Route::post('/update/{id}', [UserController::class, 'updateTendik'])->name('Tendik.update');
         });
         
-        
+ Route::middleware('auth')->prefix('orangtua')->group(function () {
+    Route::get('/create', [UserController::class, 'createOrangtua'])->name('orangtua.create');
+    Route::post('/', [UserController::class, 'storeOrangtua'])->name('orangtua.store');
+});
+       
         
     });
 });

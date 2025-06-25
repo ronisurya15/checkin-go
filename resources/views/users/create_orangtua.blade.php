@@ -6,8 +6,8 @@
         <div class="col-sm-6 col-md-6 col-12">
             <div class="card">
                 <div class="card-header text-white bg-dark d-flex justify-content-between align-items-center">
-                    <span>Tambah Pengguna : Orang Tua</span>
-                    <a href="{{ route('user.index') }}?key=4" class="btn btn-sm btn-warning">Kembali</a>
+                    <span>Tambah Pengguna: Orang Tua</span>
+                    <a href="{{ route('user.index') }}?key=5" class="btn btn-sm btn-warning">Kembali</a>
                 </div>
 
                 <div class="card-body">
@@ -20,8 +20,18 @@
                         </div>
 
                         <div class="form-group mb-2">
+                            <label for="">Username <span class="text-danger">*</span></label>
+                            <input type="text" name="username" class="form-control" required>
+                        </div>
+
+                        <div class="form-group mb-2">
                             <label for="">No HP <span class="text-danger">*</span></label>
-                            <input type="number" name="no_hp" class="form-control" required>
+                            <input type="text" name="no_hp" class="form-control" required>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="">Password <span class="text-danger">*</span></label>
+                            <input type="password" name="password" class="form-control" required>
                         </div>
 
                         <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
